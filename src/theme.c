@@ -348,14 +348,8 @@ theme_read(struct theme *theme, const char *theme_name)
 static void
 theme_read_override(struct theme *theme)
 {
-	char *home = getenv("HOME");
-	if (!home) {
-		wlr_log(WLR_ERROR, "$HOME not set");
-		return;
-	}
-
 	char f[4096] = { 0 };
-	snprintf(f, sizeof(f), "%s/.config/labwc/themerc-override", home);
+	snprintf(f, sizeof(f), "%s/themerc-override", rc.config_dir);
 
 	FILE *stream = fopen(f, "r");
 	if (!stream) {
